@@ -1,0 +1,99 @@
+NAME
+    CAD::Drawing::Calculate::Finite - Vector graphics and limited space.
+
+Description
+    This module is intended as a back-end to CAD::Drawing for methods
+    specific to finite formats (and entities) like images and postscript.
+
+AUTHOR
+      Eric L. Wilhelm
+      ewilhelm at sbcglobal dot net
+      http://pages.sbcglobal.net/mycroft
+
+COPYRIGHT
+    This module is copyright (C) 2003 by Eric L. Wilhelm and A. Zahner Co.
+
+LICENSE
+    This module is distributed under the same terms as Perl. See the Perl
+    source package for details.
+
+    You may use this software under one of the following licenses:
+
+      (1) GNU General Public License
+        (found at http://www.gnu.org/copyleft/gpl.html)
+      (2) Artistic License
+        (found at http://www.perl.com/pub/language/misc/Artistic.html)
+
+NO WARRANTY
+    This software is distributed with ABSOLUTELY NO WARRANTY. The author and
+    his employer will in no way be held liable for any loss or damages
+    resulting from its use.
+
+Modifications
+    The source code of this module is made freely available and
+    distributable under the GPL or Artistic License. Modifications to and
+    use of this software must adhere to one of these licenses. Changes to
+    the code should be noted as such and this notification (as well as the
+    above copyright information) must remain intact on all copies of the
+    code.
+
+    Additionally, while the author is actively developing this code,
+    notification of any intended changes or extensions would be most helpful
+    in avoiding repeated work for all parties involved. Please contact the
+    author with any such development plans.
+
+SEE ALSO
+      CAD::Drawing
+
+Changes
+      0.05 First public release
+
+Methods
+  fit_to_bound
+
+    Performs extents and scaling to fit a number of entities within a bound.
+    Returns the scale which is required to create the fit.
+
+      $scale = $drw->fit_to_bound(\@bound, \@border, \%opts);
+
+  get_clip_points
+
+    Returns a polyline in terms of image pixels. If a rectangle was stored
+    in the image, translates this to a polyline that will be clockwise from
+    lower-left after being switched to world coordinates.
+
+    If there are no clip points, the image boundary will be returned.
+
+      $drw->get_clip_points($addr);
+
+  get_world_clip_points
+
+      $drw->get_world_clip_points($addr);
+
+  get_image_rectangle
+
+      $drw->get_image_rectangle($addr);
+
+  get_world_image_rectangle
+
+      $drw->get_world_image_rectangle();
+
+Image Pixel Calculations
+    These allow you to translate between drawing space and image space.
+
+  drw_to_img
+
+    Returns the ($i,$j) pixel in (left-handed (typical)) image coordinates
+    corresponding to the [$x,$y] value of @point.
+
+    Floating point values will be returned. Do your own rounding!
+
+      $drw->drw_to_img(\@point, $addr);
+
+  img_to_drw
+
+    Returns the world ($x, $y) location corresponding to the image pixels in
+    @pixel.
+
+      $drw->img_to_drw(\@pixel, $addr);
+
